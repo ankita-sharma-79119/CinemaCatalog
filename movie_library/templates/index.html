@@ -1,0 +1,53 @@
+{% from "macros/main.jinja2" import display_featured, display_feature_dot %}
+{% extends "layout.html" %}
+
+{% block header_content %}
+<!-- load static styles-->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/slideshow.css') }}" />
+
+<!--define scripting methods for the displaying slideshow-->
+<script>    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("slides_img");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+    }
+</script>
+{% endblock %}
+
+{% block main_content %}
+<div class="slideshow">
+    <div class="slideshow-container">
+        {{ display_featured(feature_movies) }}
+    </div>
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+</div>
+    
+<div style="text-align:center; margin-top: 1rem;">
+    {{ display_feature_dot(feature_movies) }}
+</div>
+
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+</script>
+{% endblock %}

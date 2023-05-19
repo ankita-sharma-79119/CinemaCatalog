@@ -1,0 +1,69 @@
+.button--add{
+    display: flex;
+    position: absolute;
+    bottom: 4rem;
+    right: 2rem;
+    height: 5rem;
+    width: 5rem;
+    border: var(--border);
+    border-radius: 50%;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.75rem;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (min-width: 50rem){
+    .button--add{
+        right: 3rem;
+    }
+}
+
+@media screen and (min-width: 80rem){
+    .button--add{
+        right: 4rem;
+    }
+}
+
+.button--add:hover{
+    color: var(--text);
+    background-color: var(--accent-color);
+}
+
+.table{
+    max-width: 50rem;
+    width: 100%;
+    margin: 0 auto;
+    border-spacing: 0;
+}
+
+.table__cell{
+    padding: 1.25rem 1rem;
+}
+
+.table__cell--header{
+    text-align: left;
+    padding: 0.5rem 1rem;
+    border-bottom: var(--border);
+}
+
+.table__movieTitle{
+    font-weight: 600;
+}
+
+.table__movieDirector{
+    font-size: 0.85em;
+}
+
+.table__link:hover{
+    text-decoration: underline;
+    text-decoration-color: var(--accent-color);
+}
+
+.table__empty{
+    display: block;
+    text-align: center;
+    font-size: 1.2rem;
+}

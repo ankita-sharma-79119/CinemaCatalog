@@ -1,0 +1,122 @@
+{% from "macros/svgs.jinja2" import star, pencil %}
+
+{% extends "layout.html" %}
+
+{% block header_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/movie_details.css') }}">
+{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <header class="movie__header">
+        <div class="header__row">
+            <div class="movie__name">
+                <h1>{{ movie.name }}</h1>
+                <div class="movie__rating">
+                {% for i in range(5) %}
+                    <a class="rating__link" href="{{ url_for('movie_route.rate_movie', id=movie.movie_Id, rating=i+1) }}">
+                        {{ star("star" + (" star--filled" if movie.rating > i else "")) }}
+                    </a>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="movie__watched">
+                {% if movie.last_watched %}
+                    <p>
+                        Last Watched: <a href="{{ url_for('movie_route.last_watched_update', id=movie.movie_Id) }}" class="watched__link">
+                            <time datetime="{{ movie.last_watched }}">
+                                {{ movie.last_watched.strftime("%d %b %Y") }}
+                            </time>
+                        </a>
+                    </p>
+                {% else %}
+                    <p><a href="{{ url_for('movie_route.last_watched_update', id=movie.movie_Id) }}" class="watched_link">Not watched yet</a></p>
+                {% endif %}
+                <a href="{{ url_for('movie_route.edit_movie', id=movie.movie_Id) }}" class="movie__edit">Edit {{ pencil("pencil") }}</a>
+            </div>
+        </div>
+        
+    </header>
+
+    {% if movie.video_link %}
+        <iframe
+            class="movie__video"
+            src="{{ movie.video_link }}"
+            title="Youtube video player"
+            frameborder="0"
+            allow="acceleromerter; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    {% endif %}
+
+    <div class="movie__genres">
+        {% if movie.genres %}
+            <div class="movie__genre_list">
+                <ul class="list">
+                {% for genre in movie.genres %}
+                    <li class="list__item">{{ genre }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+    
+    {% if movie.plot %}
+        <p class="movie__plot">{{ movie.plot }}</p>
+        <hr>
+    {% else %}
+        <p class="movie__plot">No Plot added yet. <a href="{{ url_for('movie_route.edit_movie', id=movie.movie_Id) }}" class="link">Add one?</a></p>
+        <hr>
+    {% endif %}
+
+    <div class="movie__director">
+        <div class="movie__director_block">
+            <h2 class="movie__director_label">Director</h2>
+            <p class="movie__director_content">{{ movie.director }}</p>
+        </div>
+    </div>
+    <hr>
+
+    {% if movie.writers %}
+    <div class="movie__writers">
+        <div class="movie__writer_list">
+            <h2 class="movie_writer_label">Writers</h2>
+            <ul class="list">
+                {% for writer in movie.writers %}
+                    <li class="list__item">{{ writer }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <hr>
+    {% endif %}
+
+    <div class="movie__meta">
+        {% if movie.cast %}
+            <h2>Casting</h2>
+            <div class="movie__casting">
+                {% set cast_len = movie.cast|length %}
+                {% set cast_len_half = cast_len//2 %}
+                
+                <div class="grid--item">
+                    <ul class="list">
+                    {% for actor in movie.cast[0:cast_len_half] %}
+                        <li class="list__item">{{ actor }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="grid--item">
+                    <ul class="list">
+                    {% for actor in movie.cast[cast_len_half:cast_len] %}
+                        <li class="list__item">{{ actor }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
