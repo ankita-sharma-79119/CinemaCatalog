@@ -1,168 +1,221 @@
-/* Movie Content Styling Before Video */
-
-.container{
-    max-width: 50rem;
-    margin: 0 auto;
+body {
+    background: radial-gradient(black, transparent);
 }
-
-.movie__header{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2.5rem;
-}
-
-.header__row{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.movie__name{
-    display: flex;
-    align-items: center;
-}
-
-.movie__rating{
-    display: flex;
-    margin-left: 1rem;
-}
-
-.rating__link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: unset;
-}
-
-.rating__link:not(:first-of-type){
-    margin-left: 2px;
-}
-
-.star{
-    width: 1.5rem;
-    height: 1.5rem;
-    fill: none;
-}
-
-.star--filled {
-    fill: #ffd02a;
-}
-
-.movie__watched{
-    display: flex;
-}
-
-.watched__link{
-    color: inherit;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.watched__link:hover{
-    text-decoration: underline;
-}
-
-.movie__edit{
-    display: flex;
-    text-decoration: none;
-    align-items: center;
-    margin-left: 1rem;
-    color: inherit;
-}
-
-.movie__edit:hover{
-    text-decoration: underline;
-}
-
-.pencil{
-    width: 1em;
-    height: 1em;
-    margin-left: 3px;
-}
-
-/* Movie Content Video Styling */
-
-.movie__video {
+.image-container {
     width: 100%;
-    aspect-ratio: 16/9;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 5px 15px 0 rgba(0,0,0,0.25),
-      0 15px 35px 0 rgba(0,0,0,0.25);
-    border-radius: 4px;
+    margin: 0 auto;
+    position: relative;
 }
-
-/* Movie Content Styling After Video */
-
-h2 {
-    margin-right: 1rem;
-    font-size: 1em;
+.image-container > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
 }
-
-.movie__genres{
-    margin-bottom: 3rem;
+.main-content {
+    width: 101%;
+    height: 733px;
+    margin-top: -122px;
+    position: absolute;
+    padding: 0px 35px;
 }
-
-.movie__genres .movie__genre_list .list {
-    list-style: none;
-    display: inline-flex;
-    font-size: 0.8em;
-}
-
-.movie__genres .movie__genre_list .list .list__item{
-    margin: 0 0.5rem;
-    padding: 0 0.8em;
-    background-color: var(--tag-color);
-    border-style: solid;
-    border-radius: 20%;
-    border-color: var(--tag-color-border);
-    border-width: 1px;
-}
-
-.movie__plot {
-    margin-bottom: 1rem;
-    font-family: Raleway;
-    margin-top: 20px;
-}
-
-.movie__director_content {
-    display: inline-flex;
-    font-size: 0.85rem;
-    margin-bottom: 10px;
-}
-
-.movie__director, .movie__writers {
-    margin-top: 10px;
-}
-
-.movie_writer_label, .movie__director_label {
+.main-content-child {
     float: left;
 }
-
-.movie__writers .movie__writer_list .list {
-    list-style: square;
-    display: inline-flex;
-    font-size: 0.85rem;
+.sidebar > img {
+    width: 257px;
+    height: 350px;
+}
+.sidebar {
+    /* margin-top: 142px; */
+    width: 28%;
+    height: 58em;
+    padding: 1.8%;
+    background: #fff;
+    border: 2px solid #5b695b;
+    border-radius: 5px;
+}
+.custom-heading {
+    font-size: 1.5rem;
+    color: #3a3b45!important;
+    font-weight: 700!important;
+    line-height: 1.2;
+}
+.text-body{
+    font-family: 'Be Vietnam',sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #858796 !important;
+    text-align: left;
+}
+.right-content {
+    width: 67%;
+    padding: 3px 29px;
+    margin-left: 43px;
+    background: #fff;
+    border: 2px solid #5b695b;
+    border-radius: 5px;
+}
+h3.large-heading{
+    color: #3a3b45!important;
+    font-size: 2.75rem;
+}
+.share-btn{
+    color: #fff;
+    background-color: #e74a3b;
+    border-color: #e74a3b;
+    padding: 10px 25px;
+}
+.share-btn > span{
+        font-weight: bolder;
+}
+.main-heading {
+    width: 70%;
+}
+.heading-share {
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 20px;
     margin-bottom: 10px;
 }
-
-.movie__writers .movie__writer_list .list .list__item{
-    margin-left: 1.5rem;
+.second-section {
+    margin-top: 20px;
+    min-height: 692px;
 }
-
-.movie__meta {
-    margin: 20px auto;
+.tab-content {
+    margin-top: 29px;
 }
-
-.movie__meta .movie__casting {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin-left: 30px;
-    margin-top: 10px;
+.tab-button {
+    background: none;
+    font-weight: 700;
+    border: none;
+    color: #333545;
+    display: inline-block;
+    position: relative;
+    padding: 0 11px 11px 0;
+    bottom: -17px;
 }
-
-.movie__meta .movie__casting .grid--item .list .list__item {
-    list-style: circle;
+.border-div{
+    border-bottom: 1px solid grey;
+    margin-top: 17px;
+}
+button:hover {
+    background-color: transparent;
+}
+button:focus, button:active {
+    outline: transparent;
+    outline: transparent;
+    border-bottom: 3px solid red;
+}
+.custom-col , .staff-column {
+    width: 33%;
+    float: left;
+}
+.custom-col > h2 , .staff-column > h2 {
+    color: #3a3b45 !important;
+    font-weight: 700 !important;
+    font-size: 1.7rem;
+    margin-top: -9px;
+}
+.column-container .cast_display {
+    text-decoration: none;
+    width: 100%;
+    float: left;
+    margin-top: 15px;
+}
+.column-container .thumb-image > img, .user-image > img {
+    width: 50px !important;
+    height: 60px !important;
+    border-radius: 50%;
+}
+.column-container {
+    float: left;
+    width: 33%;
+}
+.thumb-image {
+    float: left;
+    width: 33%;
+}
+.heading-container {
+    float: left;
+    width: 50%;
+    margin-top: 6px;
+}
+.heading-container .title {
+    color: #4e73df;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-weight: 700;
+}
+.heading-container .profession {
+    color: #b7b9cc!important;
+    font-size: 1rem;
+}
+.video-frame {
+    float: left;
+    margin: 15px;
+}
+.user-image {
+    width: 10%;
+    float: left;
+}
+.review-content {
+    width: 85%;
+    float: left;
+}
+.review-header, .review-body {
+    display: inline-block;
+    width: 100%;
+}
+h2.customer-name {
+    font-size: 2rem;
+    float: left;
+    color: #3a3b45!important;
+    margin: 4px;
+}
+.review-date > img {
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+}
+.review-date {
+    float: left;
+}
+.review-stars {
+    float: right;
+}
+.review-stars > img {
+    width: 15px;
+    height: 15px;
+}
+.review-body {
+    color: #858796;
+    font-family: 'Be Vietnam',sans-serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+.rating-figure {
+    float: right;
+    margin-left: 6px;
     margin-top: 2px;
-    font-size: 0.9em;
-    font-family: Ysabeau;
+    background: #f6c23e!important;
+    padding: 0 6px;
+    border-radius: 12px;
+}
+div#Reviews {
+    margin-top: 0px;
+}
+.review-users {
+    display: inline-block;
+    margin-top: 25px;
+}
+a.share-btn:hover {
+    color: #fff !important;
+    text-decoration: none;
+}
+.staff-container {
+    width: 100%;
+    float: left;
 }

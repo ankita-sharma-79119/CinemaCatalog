@@ -1,28 +1,19 @@
-.form__add_movie, .form__login{
-    margin: 0 auto;
-    max-width: 30rem;
-    border: var(--border);
-    font-size: 0.95rem;
+.form__login{
+    margin: 60px auto 140px;
+    width: 40rem;
+    border: 1px solid black;
+    box-shadow: 0.75rem 0.75rem 0 -0.2rem moccasin ;
+}
 
-    background: var(--background-color);
-
-    box-shadow: 0.75rem 0.75rem 0 -0.2rem var(--accent-color);
+.form__register{
+    margin: 60px auto 45px;
+    width: 40rem;
+    border: 1px solid black;
+    box-shadow: 0.75rem 0.75rem 0 -0.2rem moccasin ;
 }
 
 .form__container{
-    padding: 2.5rem 1.5rem 1.5rem 1.5rem;
-}
-
-@media screen and (min-width: 24.75rem){
-    .form__container{
-        padding-left: 2rem;
-    }
-}
-
-@media screen and (min-width: 30rem){
-    .form__container{
-        padding-left: 2.5rem;
-    }
+    padding: 3rem 2rem 3rem 2rem;
 }
 
 .form__group{
@@ -46,32 +37,32 @@
 
     padding: 0.75rem 0.5rem;
 
-    background: var(--background-color);
+    background: lightgrey;
 }
 
 .form__field:focus {
-    border-bottom: var(--border);
+    border-bottom: 3px solid black;
 }
 
 .button--form {
     margin: 2rem 0 0 auto;
     padding: 0.75rem 3rem;
     border: none;
-    background: var(--background-color);
+    background: moccasin;
 }
 
 .button--form:hover {
-    background: var(--background-color-hover);
+    background: goldenrod;
 }
 
 .form__small {
-    font-size: 0.83rem;
-    color: var(--text-muted);
+    font-size: 1.5rem;
+    color: #595959;
 }
 
 .form__link {
     text-decoration: none;
-    color: var(--accent-color);
+    color: cadetblue;
 }
 
 .form__link:hover {
@@ -86,12 +77,12 @@
 .form__flash {
     display: block;
     padding: 0.5rem;
-    color: var(--text);
+    color: orange;
 }
 
 .form__error,
 .form__flash--danger {
-    background: var(--accent-color);
+    background: red;
 }
 
 .form__flash {
@@ -99,5 +90,5 @@
 }
 
 .form__flash--success {
-    background: var(--accent-color-2);
+    background: green;
 }

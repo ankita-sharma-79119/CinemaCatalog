@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+    <section class="popular_section_container">
+        <div class="title_container">
+            <h3 class="section_popular_title">popular Movies</h3>
+        </div>
+
+        <div class="display_movie_container">
+            {{ display_movies(popular, genres_ids, 0, 10) }}
+        </div>
+        <div class="pagination__btn" id="pagination">
+            <a id="previous_link" href="{{ url_for('pages.popular_page', selected = starting_page-1, current = starting_page) }}">
+                <button id="previous" value="{{ starting_page-1 }}" class="btn">&laquo;</button>
+            </a>
+            {% for i in range(3) %}
+                <a id="{{ 'btn_link_'+i|string }}" href="{{ url_for('pages.popular_page', selected = starting_page+i, current = starting_page) }}">
+                    <button id="{{ 'btn_'+i|string }}" class="btn {{ 'btn-active' if starting_page+i == selected_page }}">{{ starting_page+i }}</button>
+                </a>
+            {% endfor %}
+            <a id="next_link" href="{{ url_for('pages.popular_page', selected = starting_page+3, current = starting_page) }}">
+                <button id="next" class="btn">&raquo;</button>
+            </a>
+        </div>
+    </section>
+{% endblock %}

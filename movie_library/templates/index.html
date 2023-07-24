@@ -1,53 +1,60 @@
-{% from "macros/main.jinja2" import display_featured, display_feature_dot %}
 {% extends "layout.html" %}
 
-{% block header_content %}
-<!-- load static styles-->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/slideshow.css') }}" />
-
-<!--define scripting methods for the displaying slideshow-->
-<script>    
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
-    
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
-    }
-    
-    function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("slides_img");
-      let dots = document.getElementsByClassName("dot");
-      if (n > slides.length) {slideIndex = 1}    
-      if (n < 1) {slideIndex = slides.length}
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
-      }
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex-1].style.display = "block";  
-      dots[slideIndex-1].className += " active";
-    }
-</script>
-{% endblock %}
-
 {% block main_content %}
-<div class="slideshow">
-    <div class="slideshow-container">
-        {{ display_featured(feature_movies) }}
-    </div>
-    <a class="prev" onclick="plusSlides(-1)">❮</a>
-    <a class="next" onclick="plusSlides(1)">❯</a>
-</div>
-    
-<div style="text-align:center; margin-top: 1rem;">
-    {{ display_feature_dot(feature_movies) }}
-</div>
+  <main class="main-content">
+      <section class="slideshow">
+        <div class="slideshow-inner">
+          <div class="slides">
+            {{ slideshow(now_playing) }}
+          </div>
+          <div class="pagination">
+            <div class="item is-active"> 
+              <span class="icon">1</span>
+            </div>
+            <div class="item">
+              <span class="icon">2</span>
+            </div>
+            <div class="item">
+              <span class="icon">3</span>
+            </div>
+            <div class="item">
+              <span class="icon">4</span>
+            </div>
+            <div class="item">
+              <span class="icon">5</span>
+            </div>
+            <div class="item">
+              <span class="icon">6</span>
+            </div>
+          </div>
+          <div class="arrows">
+            <div class="arrow prev">
+              <span class="svg svg-arrow-left">
+                <svg version="1.1" id="svg4-Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px" height="26px" viewBox="0 0 14 26" enable-background="new 0 0 14 26" xml:space="preserve"> <path d="M13,26c-0.256,0-0.512-0.098-0.707-0.293l-12-12c-0.391-0.391-0.391-1.023,0-1.414l12-12c0.391-0.391,1.023-0.391,1.414,0s0.391,1.023,0,1.414L2.414,13l11.293,11.293c0.391,0.391,0.391,1.023,0,1.414C13.512,25.902,13.256,26,13,26z"/> </svg>
+                <span class="alt sr-only"></span>
+              </span>
+            </div>
+            <div class="arrow next">
+              <span class="svg svg-arrow-right">
+                <svg version="1.1" id="svg5-Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px" height="26px" viewBox="0 0 14 26" enable-background="new 0 0 14 26" xml:space="preserve"> <path d="M1,0c0.256,0,0.512,0.098,0.707,0.293l12,12c0.391,0.391,0.391,1.023,0,1.414l-12,12c-0.391,0.391-1.023,0.391-1.414,0s-0.391-1.023,0-1.414L11.586,13L0.293,1.707c-0.391-0.391-0.391-1.023,0-1.414C0.488,0.098,0.744,0,1,0z"/> </svg>
+                <span class="alt sr-only"></span>
+              </span>
+            </div>
+          </div>
+        </div> 
+      </section>
+      <section class="popular_movies_container">
+          <div class="title_container">
+              <div class="image-container">
+                  <img src="static/img/video-camera.svg" class="video_camera__img" width="30px">
+              </div>
+              <h3 class="section_title">Popular Movies</h3>
+              <a href="{{ url_for('pages.popular_page', selected = 1, current = 1) }}"><button class="btn_view_popular">View All</button></a>
+          </div>
 
-<script>
-    let slideIndex = 1;
-    showSlides(slideIndex);
-</script>
+          <div class="display_movie_container">
+              {{ display_movies(popular,genres_ids,0,6) }}
+          </div>
+      </section>
+    </main>
 {% endblock %}

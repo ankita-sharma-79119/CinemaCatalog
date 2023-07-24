@@ -1,34 +1,78 @@
-{% from "macros/nav.jinja2" import header %}
 {% from "macros/footer.jinja2" import footer %}
+{% from "macros/util_functions.jinja2" import slideshow, display_movies %}
 
 <!DOCTYPE html>
-<html lang="en" class="{{ 'dark-mode' if session.get('theme') == 'dark' }}">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--loading google fonts-->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Ysabeau&display=swap" rel="stylesheet">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>CinemaCatalog</title>
 
-        <!--loading static css files-->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}" />
+    <!-- Import styling css -->
+    <!-- BootStrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-        <title>{{ title | default('Movie Watchlist')}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-        {% block header_content %}
-        {% endblock %}
-    </head>
-    <body>
-        {{ header(session.get("email"), session.get("theme")) }}
-        <main class="main">
-            {% block main_content %}
-            {% endblock %}
-        </main>
-        {{ footer() }}
-    </body>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans%3A400%2C400italic%2C600%2C700%2C700italic%7COswald%3A400%2C300%7CVollkorn%3A400%2C400italic'>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/mainStyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}" >
+    {% block header_content %}
+    {% endblock %}
+</head>
+<body>
+    <header class="header">
+        <section class="header__container">
+            <div class="logo__container">
+                <img src="{{ url_for('static', filename='/img/logo.svg') }}" class="logo__img">
+                <h1 class="site__name">Cinema Catalog</h1>
+            </div>
+            <div class="search__bar">
+                <form class="d-flex"> 
+                    <input class="form-control mr-2 search__input" type="search" placeholder="Search" aria-label="Search"> 
+                    <button class="btn btn-dark" type="submit">Search</button> 
+                </form>
+            </div>
+        </section>
+        <section class="navbar__container">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                  <ul class="nav navbar-nav navbar__list">
+                    <li class="active"><a href="{{ url_for('pages.homepage') }}">Home</a></li>
+                    <li><a href="{{ url_for('pages.popular_page', selected = 1, current = 1) }}">Popular</a></li>
+                    <li><a href="{{ url_for('movie_route.get_watchlist') }}">Watchlist</a></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right navbar__list">
+                    <li><a href="{{ url_for('user_route.register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="{{ url_for('user_route.login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                  </ul>
+                </div>
+              </nav>
+        </section>
+        <hr class="section_divider">
+        <section></section>
+    </header>
+    {% block main_content %}
+    {% endblock %}
+
+    {{ footer() }}
+
+    <!-- Import js files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js'></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='/js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='/js/mainScript.js') }}"></script>
+</body>
 </html>

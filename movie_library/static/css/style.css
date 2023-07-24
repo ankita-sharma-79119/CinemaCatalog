@@ -1,0 +1,183 @@
+body{
+    margin: 0;
+    color: black;
+}
+
+a{
+    color: black;
+}
+
+button{
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: cadetblue;
+}
+
+.header__container{
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+.header{
+    background-color: #f8f8f8;
+}
+
+.header__container{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.search__bar{
+    margin: auto 20px;
+}
+
+.search__input{
+    width: 20rem;
+}
+
+.logo__container{
+    display: inherit;
+    float: left;
+}
+
+.site__name{
+    font-family: 'Bruno Ace SC', sans-serif;
+    font-weight: normal;
+    font-size: 26px;
+    display: inherit;
+    align-items: center;
+    margin: 0;
+}
+
+.logo__img{
+    width: 80px;
+}
+
+.section_divider{
+    margin:0; 
+    color:black; 
+    padding: 4px;
+}
+
+.navbar__list{
+    flex-direction: row;
+}
+
+.navbar-default{
+    border-color: white;
+}
+
+/* .title_container{
+    margin-bottom: 50px;
+} */
+
+.video_camera__img{
+    float: left;
+    margin-right: 20px;
+}
+
+.section_title{
+    margin: 0;
+    vertical-align: middle;
+    font-family: "Oswald", sans-serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    float: left;
+}
+
+.popular_movies_container{
+    max-width: 70%;
+    margin: 100px auto;
+}
+
+.display_movie_container{
+    display: inline-grid;
+    grid-template-columns: 50% 50%;
+    margin-top: 10px;
+}
+
+.movie_display{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    margin-right: 5rem;
+}
+
+.movie__image{
+    height: 300px;
+    width: 220px;
+    float: left;
+}
+
+.movie__details{
+    width: 30rem;
+    list-style: none;
+}
+
+.movie__details .movie__title{
+    color: #3c494e;
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.movie__details .movie__genre{
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.movie__details .movie__desc{
+    text-align: justify;
+    margin-bottom: 5px;
+}
+
+.btn_view_popular{
+    float: right;
+}
+
+.footer{
+    padding: 1rem 0;
+    color: #595959;
+    text-align: center;
+}
+
+.popular_section_container{
+    max-width: 70%;
+    margin: 50px auto 100px;
+}
+
+.section_popular_title{
+    margin: 0 0 10px 0;
+    vertical-align: middle;
+    font-size: 3rem;
+    font-family: "Oswald", sans-serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    float: left;
+}
+
+.pagination__btn{
+    padding-right: 10rem;
+    margin-top: 5rem;
+    float: right;
+    display: block;
+}
+
+.btn-active, .btn:hover {
+    background-color: #666;
+    color: white;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+    color: white;
+}

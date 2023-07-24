@@ -2,6 +2,7 @@ flask==2.3.2
 pymongo==4.3.3
 flask-wtf==1.1.1
 python-dotenv==1.0.0
+requests
 flask-security
 email_validator
 passlib

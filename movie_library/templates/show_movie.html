@@ -1,0 +1,233 @@
+{% from "macros/svgs.jinja2" import star, pencil %}
+{% from "macros/util_functions.jinja2" import display_list_data %}
+
+{% extends "layout.html" %}
+
+{% block header_content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/movie_details.css') }}">
+
+<script>
+  function tabShift(cityName) {
+    var i;
+    var x = document.getElementsByClassName("tab-content");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    document.getElementById(cityName).style.display = "block";
+  }
+</script>
+
+{% endblock %}
+
+{% block main_content %}
+
+<div class="container">
+  <div class="image-container">
+    <img src="{{ 'https://image.tmdb.org/t/p/original/'+movie.get('backdrop_path') }}" alt="" class="image" />
+
+    <div class="main-content">
+      <div class="sidebar main-content-child ">
+        <img src="{{ 'https://image.tmdb.org/t/p/original/'+movie.get('poster_path') }}" alt="" class="image" />
+        <h1 class="custom-heading">
+          <img src="{{ url_for('static', filename='/img/rating-logo.svg') }}" width="25" alt="" class="image" />
+          <span style="margin-left: 10px;">{{ popularity }}/10</span>
+        </h1>
+        <h1 class="custom-heading">Genre</h1>
+        <p class="text-body">{{ display_list_data(genres) }}</p>
+        <h1 class="custom-heading">Director</h1>
+        <p class="text-body">{{ display_list_data(directors) }}</p>
+        <h1 class="custom-heading">Writer</h1>
+        <p class="text-body">{{ display_list_data(writers) }}</p>
+        <h1 class="custom-heading">Cast</h1>
+        <p class="text-body">
+          {{ actors[0].get('name') }},
+          {{ actors[1].get('name') }},
+          {{ actors[2].get('name') }}
+        </p>
+        <h1 class="custom-heading">Producer</h1>
+        <p class="text-body">{{ display_list_data(producers) }}</p>
+
+      </div>
+      <div class="right-content main-content-child">
+        <div class="main-heading main-content-child ">
+          <h3 class="large-heading">{{ movie.get('title') }}<br><small>{{ movie.get('release_date') }}</small></h3>
+        </div>
+        <div class="heading-share main-content-child ">
+          <a href="#" class="share-btn"> Add to Watchlist <span>+</span></a>
+        </div>
+      </div>
+      <div class="second-section right-content main-content-child">
+        <div class="tab-container">
+          <button class="tab-button" onclick="tabShift('Summary')">Summary</button>
+          <button class="tab-button" onclick="tabShift('Reviews')">Reviews</button>
+          <button class="tab-button" onclick="tabShift('Recommendation')">More Like This</button>
+        </div>
+        <div class="border-div"></div>
+        <div id="Summary" class="tab-content">
+          <!-- <h5 class="custom-heading">New Year's Eve on the Waterfront</h5> -->
+          <p class="text-body">
+            {{ movie.get('overview') }}
+          </p>
+          {% if actors|length < 21 %}
+            {% set max_value = actors|length %}
+          {% else %}
+            {% set max_value = 21 %}
+          {% endif %}
+          {% for index in range(max_value) %}
+          {% if(index%3) == 0 %}
+          <div class="staff-container">
+            {% endif %}
+            <div class="column-container">
+              <div class="cast_display">
+                <div class="thumb-image">
+                  {% if actors[index].get('profile_pic') != None %}
+                  <img src="{{ 'https://image.tmdb.org/t/p/original/'+actors[index].get('profile_pic') }}" />
+                  {% else %}
+                  <img src="{{ url_for('static', filename='/img/dummy_picture.jpg') }}" />
+                  {% endif %}
+                </div>
+                <div class="heading-container">
+                  <div class="title">{{ actors[index].get('name') }}</div>
+                  <div class="profession">Acting</div>
+                </div>
+              </div>
+            </div>
+
+            {% if(index%3) == 2 %}
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+
+        <div id="Recommendation" class="tab-content" style="display:none">
+          <div class="video-container">
+            <!-- <iframe class="video-frame" width="300" height="200" src="https://www.youtube.com/embed/iL4RB2H9Le4"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+            <iframe class="video-frame" width="300" height="200" src="https://www.youtube.com/embed/iL4RB2H9Le4"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+            <iframe class="video-frame" width="300" height="200" src="https://www.youtube.com/embed/iL4RB2H9Le4"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+            <iframe class="video-frame" width="300" height="200" src="https://www.youtube.com/embed/iL4RB2H9Le4"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe> -->
+              {{ display_movies(recommendations,genres_ids,0,6) }}
+          </div>
+        </div>
+        <div id="Reviews" class="tab-content" style="display:none">
+          <div class="review-users">
+            <div class="user-image">
+              <img src="{{ 'https://image.tmdb.org/t/p/original/'+movie.get('poster_path') }}" />
+            </div>
+            <div class="review-content">
+              <div class="review-header">
+                <h2 class="customer-name">Stave Martin</h2>
+                <div class="review-date">
+                  <img src="{{url_for('static', filename='img/calendar.png')}}" /> <span>Feb 12, 2018</span>
+                </div>
+                <div class="review-stars">
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-blank.png')}}" />
+                  <div class="rating-figure">5/4</div>
+                </div>
+              </div>
+              <div class="review-body">
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.
+              </div>
+            </div>
+          </div>
+          <div class="review-users">
+            <div class="user-image">
+              <img src="{{ 'https://image.tmdb.org/t/p/original/'+movie.get('poster_path') }}" />
+            </div>
+            <div class="review-content">
+              <div class="review-header">
+                <h2 class="customer-name">Stave Martin</h2>
+                <div class="review-date">
+                  <img src="{{url_for('static', filename='img/calendar.png')}}" /> <span>Feb 12, 2018</span>
+                </div>
+                <div class="review-stars">
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-blank.png')}}" />
+                  <div class="rating-figure">5/4</div>
+                </div>
+              </div>
+              <div class="review-body">
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.
+              </div>
+            </div>
+          </div>
+          <div class="review-users">
+            <div class="user-image">
+              <img src="{{ 'https://image.tmdb.org/t/p/original/'+movie.get('poster_path') }}" />
+            </div>
+            <div class="review-content">
+              <div class="review-header">
+                <h2 class="customer-name">Stave Martin</h2>
+                <div class="review-date">
+                  <img src="{{url_for('static', filename='img/calendar.png')}}" /> <span>Feb 12, 2018</span>
+                </div>
+                <div class="review-stars">
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-blank.png')}}" />
+                  <div class="rating-figure">5/4</div>
+                </div>
+              </div>
+              <div class="review-body">
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.
+              </div>
+            </div>
+          </div>
+          <div class="review-users">
+            <div class="user-image">
+              <img src="{{ 'https://image.tmdb.org/t/p/original/'+movie.get('poster_path') }}" />
+            </div>
+            <div class="review-content">
+              <div class="review-header">
+                <h2 class="customer-name">Stave Martin</h2>
+                <div class="review-date">
+                  <img src="{{url_for('static', filename='img/calendar.png')}}" /> <span>Feb 12, 2018</span>
+                </div>
+                <div class="review-stars">
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-rating.png')}}" />
+                  <img src="{{url_for('static', filename='img/stars-blank.png')}}" />
+                  <div class="rating-figure">5/4</div>
+                </div>
+              </div>
+              <div class="review-body">
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% macro slideshow(now_playing) %}
+    {% for i in range(now_playing|length) %}
+    <div class="slide {{ 'is-active' if i == 0}} ">
+        <div class="slide-content">
+            <div class="caption">
+            <input type="hidden" name="movie_Id" value="{{ now_playing[i].get("id") }}" />
+            <div class="title">{{ now_playing[i].get("title") }}</div>
+            <div class="text">
+                <p>{{ now_playing[i].get("overview") }}</p>
+            </div> 
+            <a href="{{ url_for('movie_route.movie', id=now_playing[i].get('id')) }}" class="btn_trailer">
+                <span class="btn-inner">Watch Now</span>
+            </a>
+            </div>
+        </div>
+        <div class="image-container"> 
+            <img src="{{ 'https://image.tmdb.org/t/p/original/'+now_playing[i].get('poster_path') }}" alt="" class="image" />
+        </div>
+    </div>
+    {% endfor %}
+{% endmacro %}
+
+{% macro display_movies(movies, genres_ids, start, end) %}
+    {% for i in range(start,end) %}
+        <div class="movie_display">
+            <img src={{ "https://image.tmdb.org/t/p/original/"+movies[i].get("poster_path") }} alt="" class="movie__image"/>
+            <input type="hidden" name="movie_Id" value="{{ movies[i].get("id") }}" />
+            <ul class="movie__details">
+                <li class="movie__title movie">{{ movies[i].get("title") }}</li>
+                <li class="movie__genre movie">{{ display_genres(movies[i].get("genre_ids"), genres_ids) }}</li>
+                <li class="movie__desc movie">
+                    {{ movies[i].get("overview")|truncate(150) }}
+                </li>
+                <li><a href="{{ url_for('movie_route.movie', id=movies[i].get('id')) }}"><button>More Info</button></a></li>
+            </ul>
+        </div>
+    {% endfor %}
+{% endmacro %}
+
+{% macro display_genres(ids, genres_ids) %}
+    {% for i in range(ids|length) %}
+        {% if i == (ids|length)-1 %}
+            {{ genres_ids[ids[i]] }}
+        {% else %}
+            {{ genres_ids[ids[i]]+"," }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro display_list_data(list_name) %}
+    {% for i in range(list_name|length) %}
+        {% if i == (list_name|length)-1 %}
+            {{ list_name[i] }}
+        {% else %}
+            {{ list_name[i]+"," }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
