@@ -1,5 +1,9 @@
-body {
+/* body {
     background: radial-gradient(black, transparent);
+} */
+.main-body-content{
+    background-color: lightgray;
+    height: 1430px;
 }
 .image-container {
     width: 100%;

@@ -21,7 +21,7 @@
 
 {% block main_content %}
 
-<div class="container">
+<div class="container main-body-content">
   <div class="image-container">
     <img src="{{ 'https://image.tmdb.org/t/p/original/'+movie.get('backdrop_path') }}" alt="" class="image" />
 
@@ -117,7 +117,9 @@
               title="YouTube video player" frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen></iframe> -->
-              {{ display_movies(recommendations,genres_ids,0,6) }}
+              {% if recommendations|length > 0 %}
+                {{ display_movies(recommendations,genres_ids,0,6) }}
+              {% endif %}
           </div>
         </div>
         <div id="Reviews" class="tab-content" style="display:none">
